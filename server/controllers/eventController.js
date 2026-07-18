@@ -35,7 +35,40 @@ const addEvent = async (req, res) => {
 // Get All Events
 const getAllEvents = async (req, res) => {
   try {
-    const events = await Event.find();
+    const { title, venue, date } = req.query;
+
+    let filter = {};
+
+    if (title) {
+      filter.title = { $regex: title, $options: "i" };
+    }
+
+    if (venue) {
+      filter.venue = { $regex: venue, $options: "i" };
+    }
+
+    if (date) {
+      const selectedDate = new Date(date);
+
+      const nextDate = new Date(date);
+      nextDate.setDate(nextDate.getDate() + 1);
+
+      filter.date = {
+        $gte: selectedDate,
+        $lt: nextDate,
+      };
+    }
+
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const sort = req.query.sort || "date";
+
+    const events = await Event.find(filter)
+      .sort(sort)
+      .skip(skip)
+      .limit(limit);
 
     res.status(200).json(events);
   } catch (error) {
@@ -70,11 +103,9 @@ const updateEvent = async (req, res) => {
     const event = await Event.findById(req.params.id);
 
     if (!event) {
-      return res.status(404).json({ message: "Event not found" });
-    }
-
-    if (event.createdBy.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: "Not authorized" });
+      return res.status(404).json({
+        message: "Event not found",
+      });
     }
 
     const updatedEvent = await Event.findByIdAndUpdate(
@@ -88,7 +119,9 @@ const updateEvent = async (req, res) => {
 
     res.status(200).json(updatedEvent);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
 
@@ -98,18 +131,20 @@ const deleteEvent = async (req, res) => {
     const event = await Event.findById(req.params.id);
 
     if (!event) {
-      return res.status(404).json({ message: "Event not found" });
-    }
-
-    if (event.createdBy.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: "Not authorized" });
+      return res.status(404).json({
+        message: "Event not found",
+      });
     }
 
     await event.deleteOne();
 
-    res.status(200).json({ message: "Event deleted successfully" });
+    res.status(200).json({
+      message: "Event deleted successfully",
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
 
