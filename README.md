@@ -1,16 +1,152 @@
-# React + Vite
+# 🎟️ TicketHub - MERN Event Ticket Booking System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack Event Ticket Booking web application built using the MERN Stack. Users can browse events, book tickets, make a simulated UPI payment, and manage their bookings. Admins can create and manage events through a protected dashboard.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
 
-## React Compiler
+### 👤 User
+- User Registration & Login (JWT Authentication)
+- Browse all events
+- Search and filter events
+- View event details
+- Book tickets
+- Simulated UPI payment with QR code
+- View My Bookings
+- Cancel bookings
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 👨‍💼 Admin
+- Secure Admin Login
+- Create new events
+- Delete events
+- Admin Dashboard
+- View event statistics
+- Protected admin routes
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+### Frontend
+- React.js
+- React Router
+- Tailwind CSS
+- Axios
+- React Toastify
+- Lucide React
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- bcryptjs
+
+---
+
+## 📂 Project Structure
+
+```
+TicketHub/
+│
+├── client/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── server/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── server.js
+│   └── package.json
+│
+└── README.md
+```
+
+---
+
+## ⚙️ Installation
+
+### Clone the repository
+
+```bash
+git clone https://github.com/darshans-codes/ticket-booking-system.git
+```
+
+### Backend
+
+```bash
+cd server
+npm install
+npm run dev
+```
+
+### Frontend
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+---
+
+## 🔑 Environment Variables
+
+### Server (.env)
+
+```env
+PORT=5000
+
+MONGO_URI=YOUR_MONGODB_CONNECTION_STRING
+
+JWT_SECRET=YOUR_SECRET_KEY
+```
+
+### Client (.env)
+
+```env
+VITE_UPI_ID=your-upi-id@upi
+VITE_PAYEE_NAME=Your Name
+```
+
+---
+
+## 📸 Screenshots
+
+Add screenshots of:
+
+- Home Page
+- Event Details
+- Payment Page
+- My Bookings
+- Create Event
+- Admin Dashboard
+
+---
+
+## 📌 Future Improvements
+
+- Edit Event
+- Real Payment Gateway Integration
+- Email Notifications
+- Event Images Upload
+- Deployment
+
+---
+
+## 👨‍💻 Author
+
+**Darshan S**
+
+GitHub: https://github.com/darshans-codes
+
+---
+
+## 📄 License
+
+This project is created for learning and portfolio purposes.
