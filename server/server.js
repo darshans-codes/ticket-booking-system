@@ -13,8 +13,15 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://ticket-booking-system-flame.vercel.app",
+    ],
+    credentials: true,
+  })
+);app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/bookings", bookingRoutes);
